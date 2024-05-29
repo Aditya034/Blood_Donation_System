@@ -1,0 +1,45 @@
+{% extends 'layouts/index.html' %}
+{% block content %}
+<div class="row">
+    <div class="col-md-4">
+        <h4>Provide a feedback</h4>
+        <form action="{% url 'feedback' id role %}" method="post">
+            {% csrf_token %}
+            <div class="form-group mb-2">
+                <input id="input-1" name="rating" class="rating rating-loading" data-min="0" data-max="5" data-step="1" required>
+            </div>
+            <div class="form-group mb-2">
+                <textarea name="feedback" id="feedback" rows="10" class="form-control" placeholder="Your feedback" required></textarea>
+            </div>
+            <div class="form-group mb-2">
+                <button type="submit" class="btn btn-danger"><i class="ri-save-line"></i> Submit</button>
+            </div>
+        </form>
+    </div>
+
+    {% if feedback %}
+    <div class="col-md-8">
+        <h4>Your previously provided feedback</h4>
+        <p>
+            <i class="ri-star-line text-warning"></i> {{ rating }}
+        </p>
+        <p>
+            Your feedback was:
+            <q>{{ feedback }}</q>
+        </p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block css %}
+<link href="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.2/css/star-rating.min.css" media="all" rel="stylesheet" type="text/css" />
+<link href="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.2/themes/krajee-svg/theme.css" media="all" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block js %}
+<script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.2/js/star-rating.min.js" type="text/javascript"></script>
+<script>
+    $("#input-id").rating();
+</script>
+{% endblock %}

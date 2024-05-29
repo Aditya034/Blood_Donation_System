@@ -1,0 +1,71 @@
+{% extends 'layouts/index.html' %}
+{% block content %}
+<div class="row">
+    <div class="col-md-4">
+        <form action="{% url 'blood-reserves' %}" method="post">
+            {% csrf_token %}
+            <div class="form-group mb-2">
+                <label for="blood_group">Blood Group</label>
+                <select name="blood_group" id="blood_group" class="form-control" required>
+                    <option value="">Select</option>
+                    <option value="A+">A+</option>
+                    <option value="A-">A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B-">B-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="AB-">AB-</option>
+                    <option value="O+">O+</option>
+                    <option value="O-">O-</option>
+                </select>
+            </div>
+            <div class="form-group mb-2">
+                <label for="amount">Amount</label>
+                <input type="number" step="0.01" name="amount" id="amount" class="form-control" placeholder="Enter amount in ML" required>
+            </div>
+            <div class="form-group mb-2">
+                <label for="status">Status</label>
+                <select name="status" id="status" class="form-control" required>
+                    <option value="">Select</option>
+                    <option value="In Need">In Need</option>
+                    <option value="Available">Available</option>
+                    <option value="Not Available">Not Available</option>
+                </select>
+            </div>
+            <div class="form-group mb-2">
+                <button type="submit" class="btn btn-danger"><i class="ri-save-line"></i> Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="col-md-8">
+        {% if predict_val is not None %}
+        <div class="mb-3">
+            As per your usage, we predict that there is can be a requirement for <span class="badge bg-danger">{{ predict_val }}</span> blood group.
+        </div>
+        {% endif %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Blood</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for r in reserves %}
+                <tr>
+                    <td>{{ r.blood_group }}</td>
+                    <td>{{ r.amount }} ML</td>
+                    <td>{{ r.status }}</td>
+                    <td>
+                        <a href="{% url 'bank-update-status' r.id r.blood_group %}" class="text-info"><i class="ri-edit-box-line"></i> Status</a>&nbsp;&nbsp;
+                        <a href="{% url 'bank-blood-usage' r.id r.blood_group %}" class="text-success"><i class="ri-ink-bottle-line"></i> Usage</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

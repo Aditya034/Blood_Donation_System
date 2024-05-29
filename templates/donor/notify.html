@@ -1,0 +1,29 @@
+{% extends 'layouts/index.html' %}
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Blood</th>
+                    <th>Bank</th>
+                    <th>Contact</th>
+                    <th>Email</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for r in check_request %}
+                <tr>
+                    <td>{{ r.blood_group }}</td>
+                    <td>{{ r.user.first_name }} ML</td>
+                    <td>{{ r.user.profile.mobile }}</td>
+                    <td>{{ r.user.email }}</td>
+                    <td>{{ r.datetime }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

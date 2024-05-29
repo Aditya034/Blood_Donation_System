@@ -1,0 +1,82 @@
+{% extends 'layouts/index.html' %}
+{% block content %}
+<div class="row">
+    <div class="col-md-4">
+        <h4>Donors</h4>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Contact</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for u in users %}
+                    {% if u.profile.role_id == 2 %}
+                    <tr>
+                        <td>{{ u.first_name }}</td>
+                        <td>{{ u.email }}</td>
+                        <td>{{ u.profile.mobile }}</td>
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <h4>Banks</h4>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Contact</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for u in users %}
+                    {% if u.profile.role_id == 3 %}
+                    <tr>
+                        <td>{{ u.first_name }}</td>
+                        <td>{{ u.email }}</td>
+                        <td>{{ u.profile.mobile }}</td>
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <h4>Receivers</h4>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Contact</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for u in users %}
+                    {% if u.profile.role_id == 4 %}
+                    <tr>
+                        <td>{{ u.first_name }}</td>
+                        <td>{{ u.email }}</td>
+                        <td>{{ u.profile.mobile }}</td>
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

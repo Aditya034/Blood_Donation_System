@@ -1,0 +1,25 @@
+{% extends 'layouts/index.html' %}
+{% block content %}
+<div class="row">
+    {% for r in check_request %}
+    <div class="col-md-4 mb-3">
+        <div class="card shadow">
+            <div class="card-body">
+                <h4 class="mb-3">Request ID: {{ r.token_id }}</h4>
+                <p>
+                    <i class="ri-contrast-drop-line text-danger"></i> {{ r.blood_group }}<br>
+                    <i class="ri-calendar-event-line text-info"></i> {{ r.date }}
+                </p>
+                <p>
+                    <i class="ri-hourglass-2-fill text-warning"></i> {{ r.status }}
+                </p>
+                <a href="{% url 'bank-request-details' r.id %}" class="btn btn-primary"><i class="ri-information-line"></i> Details</a>
+                {% if r.status != 'Closed' %}
+                <a href="{% url 'bank-close-request' r.id %}" class="btn btn-light"><i class="ri-close-circle-line"></i> Mark as Close</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

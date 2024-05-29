@@ -1,0 +1,29 @@
+{% extends 'layouts/index.html' %}
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <table class="table">
+            <tr>
+                <th>Total</th>
+                <td>{{ total }} Request(s)</td>
+            </tr>
+            <tr>
+                <th>Accepted</th>
+                <td>{{ accepted }} Request(s)</td>
+            </tr>
+            <tr>
+                <th>Rejected</th>
+                <td>{{ rejected }} Request(s)</td>
+            </tr>
+            <tr>
+                <th>Expired</th>
+                <td>{{ expired }} Request(s)</td>
+            </tr>
+            <tr>
+                <th>Pending</th>
+                <td>{{ pending }} Request(s)</td>
+            </tr>
+        </table>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'layouts/index.html' %}
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        {{ map|safe }}
+    </div>
+    <div class="col-md-4">
+        <p class="lead">
+            Request ID: {{ data.token_id }}<br>
+            Receiver Location: {{ address.city }} {{ address.town }}<br>
+            Distance is about {{ distance }} KM
+        </p>
+    </div>
+</div>
+{% endblock %}

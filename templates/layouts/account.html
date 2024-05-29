@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }} - Blood Donation</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.3.0/fonts/remixicon.css" rel="stylesheet">
+</head>
+<body class="pt-5">
+    <div class="container">
+        <h2 class="mb-5 text-danger">Blood Donation</h2>
+        {% include 'include/msg.html' %}
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <footer class="mt-5 bg-primary text-white pt-3 pb-3">
+        <div class="container">
+            <div>&copy; {% now 'Y' %} Blood Donatiions. All Rights Reserved.</div>
+            <div>Developed by [Team Members]</div>
+        </div>
+    </footer>
+    
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+</body>
+</html>

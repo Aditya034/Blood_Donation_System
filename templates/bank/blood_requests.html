@@ -1,0 +1,35 @@
+{% extends 'layouts/index.html' %}
+{% block content %}
+<div class="row">
+    {% for r in check_request %}
+    <div class="col-md-4 mb-3">
+        <div class="card shadow h-100">
+            <div class="card-body">
+                <h4 class="mb-3">Request ID: {{ r.receiver_request.token_id }}</h4>
+                <p>
+                    <i class="ri-contrast-drop-line text-danger"></i> {{ r.receiver_request.blood_group }}<br>
+                    <i class="ri-calendar-event-line text-info"></i> {{ r.receiver_request.date }}
+                </p>
+                <p>
+                    <i class="ri-hourglass-2-fill text-warning"></i> {{ r.receiver_request.status }}
+                </p>
+                {% if r.status == 'Pending' %}
+                <a href="{% url 'bank-respond-request' r.id 'Accepted' %}" class="btn btn-success"><i class="ri-information-line"></i> Accept</a>
+                <a href="{% url 'bank-respond-request' r.id 'Rejected' %}" class="btn btn-light"><i class="ri-close-circle-line"></i> Reject</a>
+                {% elif r.status == 'Accepted' %}
+                You have <span class="text-success">{{ r.status }}</span> this request.
+                <div class="mt-3">
+                    <a href="{% url 'bank-map' r.receiver_request.id 'Receiver' %}" class="btn btn-primary"><i
+                            class="ri-road-map-line"></i> Map</a>
+                </div>
+                {% elif r.status == 'Rejected' %}
+                You have <span class="text-danger">{{ r.status }}</span> this request.
+                {% else %}
+                Request is <span class="text-danger">{{ r.status }}.
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

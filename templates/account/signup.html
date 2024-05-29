@@ -1,0 +1,49 @@
+{% extends 'layouts/account.html' %}
+{% block content %}
+<div class="row">
+    <div class="col-md-4">
+        <h4>{{ title }}</h4>
+        <form action="{% url 'signup' %}" method="post">
+            {% csrf_token %}
+            <div class="form-group mb-2">
+                <label for="name">Name</label>
+                <input type="text" name="name" id="name" class="form-control" placeholder="Enter your name" required>
+            </div>
+            <div class="form-group mb-2">
+                <label for="username">Username</label>
+                <input type="text" name="username" id="username" class="form-control" placeholder="Create your username" required>
+            </div>
+            <div class="form-group mb-2">
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" class="form-control" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group mb-2">
+                <label for="mobile">Mobile</label>
+                <input type="number" name="mobile" id="mobile" class="form-control" placeholder="Enter your mobile" required>
+            </div>
+            <div class="form-group mb-2">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" class="form-control" placeholder="Create your password" required>
+            </div>
+            <div class="form-group mb-2">
+                <label for="role">Role</label>
+                <select name="role" id="role" class="form-control" required>
+                    <option value="">Select Role</option>
+                    <option value="2">Donor</option>
+                    <option value="3">Blood Bank</option>
+                    <option value="4">Receiver</option>
+                </select>
+            </div>
+            <div class="form-group mb-2">
+                <button type="submit" class="btn btn-danger"><i class="ri-save-line"></i> Signup</button>
+            </div>
+        </form>
+        <p class="mt-3">
+            Already have an account? <a href="{% url 'login' %}">Login</a> now and get started.
+        </p>
+    </div>
+    <div class="col-md-8">
+        <img src="https://source.unsplash.com/X20g2GQsVdA" alt="" class="w-100">
+    </div>
+</div>
+{% endblock %}

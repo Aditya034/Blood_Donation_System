@@ -1,0 +1,36 @@
+{% extends 'layouts/index.html' %}
+{% block content %}
+<div class="row mb-5">
+    <div class="col-md-12">
+        <h4><i class="ri-contrast-drop-line text-danger"></i> For blood group {{ check_request.blood_group }}</h4>
+        <h4 class="text-muted"><i class="ri-calendar-event-line"></i> {{ check_request.date }}</h4>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <h4>Donors</h4>
+    </div>
+    {% for r in donors %}
+    <div class="col-md-4 mb-3">
+        <div class="card shadow h-100">
+            <div class="card-body">
+                <h4 class="mb-3">{{ r.donor.first_name }}</h4>
+                {% if r.status == 'Pending' %}
+                Request is <span class="text-warning">{{ r.status }}</span>
+                {% elif r.status == 'Accepted' %}
+                Donor has <span class="text-success">{{ r.status }}</span> this request.
+                <div class="mt-5">
+                    <i class="ri-contrast-drop-2-fill"></i> <a href="{% url 'bank-collect-blood' check_request.id check_request.blood_group r.donor.id   %}">Update Blood Details</a>
+                </div>
+                {% elif r.status == 'Rejected' %}
+                Donor has <span class="text-danger">{{ r.status }}</span> this request.
+                {% else %}
+                Request is <span class="text-danger">{{ r.status }}.
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

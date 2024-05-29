@@ -1,0 +1,29 @@
+{% extends 'layouts/index.html' %}
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Blood</th>
+                    <th>Amount</th>
+                    <th>Donor</th>
+                    <th>Request ID</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for r in data %}
+                <tr>
+                    <td>{{ r.blood_group }}</td>
+                    <td>{{ r.amount }} ML</td>
+                    <td>{{ r.donor.first_name }}</td>
+                    <td>{{ r.bank_request.token_id }}</td>
+                    <td>{{ r.datetime }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

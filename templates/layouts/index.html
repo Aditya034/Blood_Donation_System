@@ -1,0 +1,89 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }} - Blood Donation</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.3.0/fonts/remixicon.css" rel="stylesheet">
+    {% block css %}
+    {% endblock %}
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'index' %}">Blood Donation</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
+                aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarColor01">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'index' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{ user.first_name }}</a>
+                        <div class="dropdown-menu">
+                            {% if request.user.profile.role_id == 1 %}
+                            <a class="dropdown-item" href="{% url 'admin-statitics' %}"><i class="ri-bubble-chart-line"></i> Statitics</a>
+                            <a class="dropdown-item" href="{% url 'admin-users' %}"><i class="ri-user-line"></i> Users</a>
+                            <a class="dropdown-item" href="{% url 'admin-dataset' %}"><i class="ri-table-2"></i> Dataset</a>
+                            {% endif %}
+                            {% if request.user.profile.role_id == 2 or request.user.profile.role_id == 3 or request.user.profile.role_id == 4 %}
+                            <a class="dropdown-item" href="{% url 'location-update' %}"><i class="ri-map-pin-line"></i> Location Update</a>
+                            {% endif %}
+                            {% if request.user.profile.role_id == 2 %}
+                            <a class="dropdown-item" href="{% url 'donor-blood-notify' %}"><i class="ri-notification-3-line"></i> Blood Notification</a>
+                            <a class="dropdown-item" href="{% url 'blood-group-update' %}"><i class="ri-contrast-drop-line"></i> Blood Group</a>
+                            <a class="dropdown-item" href="{% url 'donor-blood-requests' %}"><i class="ri-git-pull-request-line"></i> Requests</a>
+                            {% endif %}
+                            {% if request.user.profile.role_id == 3 %}
+                            <a class="dropdown-item" href="{% url 'blood-reserves' %}"><i class="ri-ink-bottle-line"></i> Blood Reserves</a>
+                            <a class="dropdown-item" href="{% url 'blood-collection' %}"><i class="ri-ink-bottle-fill"></i> Blood Collection</a>
+                            <a class="dropdown-item" href="{% url 'bank-blood-requests' %}"><i class="ri-git-pull-request-line"></i> Requests</a>
+                            <a class="dropdown-item" href="{% url 'sent-requests' %}"><i class="ri-git-pull-request-line"></i> Sent Requests</a>
+                            {% endif %}
+                            {% if request.user.profile.role_id == 4 %}
+                            <a class="dropdown-item" href="{% url 'blood-requests' %}"><i class="ri-git-pull-request-line"></i> Requests</a>
+                            {% endif %}
+                            <a class="dropdown-item text-danger" href="{% url 'logout' %}"><i class="ri-logout-circle-r-line"></i> Logout</a>
+                        </div>
+                    </li>
+                </ul>
+                <!-- <form class="d-flex">
+                    <input class="form-control me-sm-2" type="search" placeholder="Search">
+                    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+                </form> -->
+            </div>
+        </div>
+    </nav>
+    <div class="container pt-5">
+        <h2 class="mb-5 text-danger">{{ title }}</h2>
+        {% include 'include/msg.html' %}
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <footer class="mt-5 bg-primary text-white pt-3 pb-3">
+        <div class="container">
+            <div>&copy; {% now 'Y' %} Blood Donatiions. All Rights Reserved.</div>
+            <div>Developed by [Team Members]</div>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+    {% block js %}
+    {% endblock %}
+</body>
+
+</html>

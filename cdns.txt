@@ -1,0 +1,25 @@
+<link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
+
+
+
+
+# # calling the Nominatim tool
+# loc = Nominatim(user_agent="GetLoc")
+
+# # entering the location name
+# get_address = Profile.objects.get(pk=profile_id)
+# getLoc = loc.geocode(get_address.taluka)
+
+# # printing address
+# dd(getLoc.address)
+
+# # printing latitude and longitude
+# print("Latitude = ", getLoc.latitude, "\n")
+# print("Longitude = ", getLoc.longitude)
+
+geolocator = Nominatim(user_agent="GetLoc")
+location = geolocator.reverse(f"{latitude},{longitude}")
+# dd(location)
+address = location.raw['address']
+city = address.get('city', '')
+# dd(city)

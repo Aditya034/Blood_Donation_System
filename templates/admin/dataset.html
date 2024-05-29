@@ -1,0 +1,22 @@
+{% extends 'layouts/index.html' %}
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <form action="{% url 'admin-dataset' %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary">Create and Train</button>
+        </form>
+    </div>
+</div>
+
+{% if result is not None %}
+<div class="row mt-5">
+    <div class="col-md-12">
+        <h4>Result</h4>
+        <p>
+            Accuracy is {{ result }}
+        </p>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
